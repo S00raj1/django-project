@@ -9,8 +9,8 @@
             <br>
             <table class="table">
                 <tr>
-                    <th> <h5>Items: <strong>3</strong> </h5> </th>
-                    <th> <h5>Total: <strong>$100</strong> </h5> </th>
+                    <th> <h5>Items: <strong>{{order.get_cart_items}}</strong> </h5> </th>
+                    <th> <h5>Total: <strong>${{order.get_cart_total | floatformat:2}}</strong> </h5> </th>
                     <th>
                         <a href="{% url 'checkout' %}" style="float: right; margin: 5px;" class="btn btn-success">Checkout</a>
                     </th>
@@ -34,11 +34,11 @@
                  <div style="flex:1"> 
                     <p class="quantity">{{item.quantity}}</p>
                     <div class="quantity">
-                        <img src="{% static 'image/up.png' %}"class="chg-quantity"> 
-                        <img src="{% static 'image/down.png' %}"class="chg-quantity"> 
+                        <img data-product="{{item.product.id}}" data-action="add" src="{% static 'image/up.png' %}"class="chg-quantity update-cart"> 
+                        <img data-product="{{item.product.id}}" data-action="remove" src="{% static 'image/down.png' %}"class="chg-quantity update-cart"> 
                     </div>
                 </div>
-                <div style="flex:1"> $1000</div>
+                <div style="flex:1"> ${{item.get_total}}</div>
             </div>
             {% endfor %}
 
